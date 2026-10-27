@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Marksheet</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        @media print {
+            body {
+                background: white !important;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+
+            .marksheet {
+                box-shadow: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="min-h-screen bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 flex items-center justify-center p-2">
+
+<div class="w-full max-w-5xl bg-white rounded-xl shadow-2xl p-6 md:p-8 marksheet">
+
+    <!-- ================= HEADER ================= -->
+    <div class="flex items-start justify-between border-b border-gray-200 pb-5">
+
+        <div>
+            <h1 class="text-3xl font-bold text-blue-700">
+                Student Marksheet
+            </h1>
+
+            <p class="text-gray-700 mt-1 text-sm">
+                Academic Year: 2024-25
+            </p>
+        </div>
+
+        <!-- Student Photo -->
+        <div class="w-16 h-16 rounded-full border-2 border-blue-600
+                    flex items-center justify-center overflow-hidden">
+
+            <img th:if="${student.photoName != null}"
+                 th:src="@{'/images/' + ${student.photoName}}"
+                 alt="Student Photo"
+                 class="w-full h-full object-cover">
+
+            <span th:unless="${student.photoName != null}"
+                  class="text-xs text-center text-gray-700">
+                Student<br>Photo
+            </span>
+        </div>
+
+    </div>
+
+
+    <!-- ================= STUDENT DETAILS ================= -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-1 mt-5 text-sm text-gray-800">
+
+        <!-- LEFT COLUMN -->
+        <div class="space-y-1">
+
+            <p>
+                <span class="font-semibold">Name:</span>
+                <span th:text="${student.name}">John Doe</span>
+            </p>
+
+            <p>
+                <span class="font-semibold">Roll Number:</span>
+                <span th:text="${student.rollNumber}">12345</span>
+            </p>
+
+            <p>
+                <span class="font-semibold">Email:</span>
+                <span th:text="${student.email}">
+                    john.doe@example.com
+                </span>
+            </p>
+
+        </div>
+
+
+        <!-- RIGHT COLUMN -->
+        <div class="space-y-1">
+
+            <p>
+                <span class="font-semibold">Date of Birth:</span>
+                <span th:text="${student.dateOfBirth}">
+                    2005-05-15
+                </span>
+            </p>
+
+            <p>
+                <span class="font-semibold">Gender:</span>
+                <span th:text="${student.gender}">
+                    Male
+                </span>
+            </p>
+
+            <p>
+                <span class="font-semibold">Father's Name:</span>
+                <span th:text="${student.fatherName}">
+                    Mr. Doe
+                </span>
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- ADDRESS / SCHOOL / CLASS -->
+    <div class="mt-4 text-sm text-gray-800 space-y-1">
+
+        <p>
+            <span class="font-semibold">Address:</span>
+            <span th:text="${student.addrress}">
+                123 Main St, Springfield
+            </span>
+        </p>
+
+        <p>
+            <span class="font-semibold">School:</span>
+            <span th:text="${student.schoolName}">
+                Springfield High School
+            </span>
+        </p>
+
+        <p>
+            <span class="font-semibold">Class:</span>
+            <span th:text="${student.standard}">
+                10th Grade
+            </span>
+        </p>
+
+    </div>
+
+
+    <!-- ================= MARKS ================= -->
+    <div class="mt-7">
+
+        <h2 class="text-lg font-bold text-gray-700 mb-3">
+            Marks Obtained
+        </h2>
+
+        <div class="overflow-x-auto">
+
+            <table class="w-full text-sm">
+
+                <!-- TABLE HEADER -->
+                <thead>
+
+                <tr class="bg-blue-600 text-white">
+
+                    <th class="text-left px-3 py-2 font-semibold">
+                        Subject
+                    </th>
+
+                    <th class="text-left px-3 py-2 font-semibold">
+                        Marks
+                    </th>
+
+                    <th class="text-left px-3 py-2 font-semibold">
+                        Max Marks
+                    </th>
+
+                    <th class="text-left px-3 py-2 font-semibold">
+                        Grade
+                    </th>
+
+                    <th class="text-left px-3 py-2 font-semibold">
+                        Feedback
+                    </th>
+
+                </tr>
+
+                </thead>
+
+
+                <!-- TABLE BODY -->
+                <tbody>
+
+                <tr th:each="mark : ${marks}"
+                    class="border-b border-gray-200">
+
+                    <td class="px-3 py-2 text-gray-800"
+                        th:text="${mark.subjectName}">
+                        Mathematics
+                    </td>
+
+                    <td class="px-3 py-2 text-gray-800"
+                        th:text="${mark.marks}">
+                        95
+                    </td>
+
+                    <td class="px-3 py-2 text-gray-800"
+                        th:text="${mark.maxMark}">
+                        100
+                    </td>
+
+                    <td class="px-3 py-2 font-semibold"
+                        th:text="${mark.grade}"
+                        th:classappend="${mark.grade == 'A+' ? ' text-green-600' :
+                                         mark.grade == 'A' ? ' text-green-600' :
+                                         mark.grade == 'B+' ? ' text-yellow-600' :
+                                         mark.grade == 'B' ? ' text-yellow-600' :
+                                         ' text-red-600'}">
+                        A+
+                    </td>
+
+                    <td class="px-3 py-2 text-gray-800"
+                        th:text="${mark.feedback}">
+                        Excellent
+                    </td>
+
+                </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= RESULT SUMMARY ================= -->
+
+<!--    <div class="mt-7 text-sm text-gray-800 space-y-1">-->
+
+<!--        <p>-->
+<!--            <span class="font-semibold">Total Marks:</span>-->
+
+<!--            <span th:text="${#aggregates.sum(marks.![marks])}">-->
+<!--                262-->
+<!--            </span>-->
+
+<!--            /-->
+<!--            <span th:text="${#aggregates.sum(marks.![maxMark])}">-->
+<!--                300-->
+<!--            </span>-->
+<!--        </p>-->
+
+
+<!--        <p>-->
+<!--            <span class="font-semibold">Percentage:</span>-->
+
+<!--            <span th:text="${#numbers.formatDecimal(-->
+<!--                (#aggregates.sum(marks.![marks]) * 100.0) /-->
+<!--                #aggregates.sum(marks.![maxMark]), 1, 2-->
+<!--            ) + '%'}">-->
+<!--                87.33%-->
+<!--            </span>-->
+<!--        </p>-->
+
+
+<!--        <p>-->
+<!--            <span class="font-semibold">Result:</span>-->
+
+<!--            <span th:text="${#aggregates.sum(marks.![marks]) >=-->
+<!--                (#aggregates.sum(marks.![maxMark]) * 0.33)-->
+<!--                ? 'Passed' : 'Failed'}"-->
+<!--                  class="font-medium"-->
+<!--                  th:classappend="${#aggregates.sum(marks.![marks]) >=-->
+<!--                  (#aggregates.sum(marks.![maxMark]) * 0.33)-->
+<!--                  ? ' text-green-600' : ' text-red-600'}">-->
+<!--                Passed-->
+<!--            </span>-->
+
+<!--        </p>-->
+
+<!--    </div>-->
+
+
+<!--    <div class="mt-7 text-sm text-gray-800 space-y-1">-->
+
+<!--        <p>-->
+<!--            <span class="font-semibold">Total Marks:</span>-->
+<!--            <span th:text="${totalMark}">262</span>-->
+<!--            /-->
+<!--            <span th:text="${totalMax}">300</span>-->
+<!--        </p>-->
+
+<!--        <p>-->
+<!--            <span class="font-semibold">Percentage:</span>-->
+<!--            <span th:text="${percentage + '%'}">87.33%</span>-->
+<!--        </p>-->
+
+<!--        <p>-->
+<!--            <span class="font-semibold">Result:</span>-->
+<!--            <span th:text="${passed ? 'Passed' : 'Fail'}">-->
+<!--            Passed-->
+<!--        </span>-->
+<!--        </p>-->
+
+<!--    </div>-->
+
+
+    <div class="mt-7 text-sm text-gray-800 space-y-2">
+
+        <p>
+            <span class="font-semibold">Total Marks:</span>
+            <span th:text="${totalMark}">262</span>
+            /
+            <span th:text="${totalMax}">300</span>
+        </p>
+
+        <p>
+            <span class="font-semibold">Percentage:</span>
+            <span th:text="${percentage + '%'}">87.33%</span>
+        </p>
+
+        <p>
+            <span class="font-semibold">Result:</span>
+
+            <span th:text="${passed ? 'Passed' : 'Failed'}"
+                  th:classappend="${passed
+                  ? ' text-green-600'
+                  : ' text-red-600'}"
+                  class="font-bold">
+            Passed
+        </span>
+        </p>
+
+    </div>
+    <!-- ================= FOOTER ================= -->
+
+    <div class="text-center mt-7 text-xs text-gray-500">
+
+        Generated on:
+        <span th:text="${currentDate}">
+            2025-01-18
+        </span>
+
+    </div>
+
+
+    <!-- PRINT BUTTON -->
+    <div class="text-center mt-5 no-print">
+
+        <button onclick="window.print()"
+                class="bg-blue-600 hover:bg-blue-700 text-white
+                       px-5 py-2 rounded-lg transition">
+            Print Marksheet
+        </button>
+
+    </div>
+
+</div>
+<script>
+
+</script>
+</body>
+</html>

@@ -1,0 +1,390 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Help & Support | Result Viewer</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body {
+            margin: 0;
+            background-color: #18191b;
+            color: #ffffff;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-[#18191b] text-white">
+
+<!-- Navbar -->
+<nav class="bg-[#111111] shadow-lg sticky top-0 z-50 border-b border-gray-800">
+    <div class="max-w-7xl mx-auto px-6">
+
+        <div class="flex justify-between items-center h-16">
+
+            <!-- Logo -->
+            <a th:href="@{/}"
+               href="/"
+               class="text-2xl font-bold text-blue-400">
+                Result Viewer
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center space-x-8">
+
+                <a th:href="@{/}"
+                   href="/"
+                   class="text-gray-300 hover:text-blue-400 transition">
+                    Home
+                </a>
+
+                <a th:href="@{/view-result}"
+                   href="/view-result"
+                   class="text-gray-300 hover:text-blue-400 transition">
+                    View Result
+                </a>
+
+                <a th:href="@{/admin/add-result}"
+                   href="/admin/add-result"
+                   class="text-gray-300 hover:text-blue-400 transition">
+                    Add Result
+                </a>
+
+                <a th:href="@{/help}"
+                   href="/help"
+                   class="text-blue-400 font-semibold">
+                    Help
+                </a>
+
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="menu-btn"
+                    type="button"
+                    aria-label="Toggle navigation menu"
+                    aria-expanded="false"
+                    aria-controls="mobile-menu"
+                    class="md:hidden text-gray-300 hover:text-blue-400 focus:outline-none">
+
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     class="h-7 w-7"
+                     fill="none"
+                     viewBox="0 0 24 24"
+                     stroke="currentColor">
+
+                    <path stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+
+            </button>
+
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu"
+             class="hidden md:hidden pb-4">
+
+            <a th:href="@{/}"
+               href="/"
+               class="block py-3 text-gray-300 hover:text-blue-400">
+                Home
+            </a>
+
+            <a th:href="@{/view-result}"
+               href="/view-result"
+               class="block py-3 text-gray-300 hover:text-blue-400">
+                View Result
+            </a>
+
+            <a th:href="@{/admin/add-result}"
+               href="/admin/add-result"
+               class="block py-3 text-gray-300 hover:text-blue-400">
+                Add Result
+            </a>
+
+            <a th:href="@{/help}"
+               href="/help"
+               class="block py-3 text-blue-400 font-semibold">
+                Help
+            </a>
+
+        </div>
+
+    </div>
+</nav>
+
+
+<!-- Main Help Section -->
+<main class="min-h-screen px-4 py-10 md:py-14">
+
+    <div class="max-w-5xl mx-auto">
+
+        <!-- Page Heading -->
+        <div class="text-center mb-10">
+
+            <h1 class="text-3xl md:text-4xl font-bold mb-4">
+                Help &amp; Support
+            </h1>
+
+            <p class="text-gray-400 text-sm md:text-base">
+                Find answers to common questions about viewing your academic results.
+            </p>
+
+        </div>
+
+
+        <!-- Help Card -->
+        <div class="max-w-2xl mx-auto bg-[#111111] border border-gray-700
+                        rounded-2xl p-6 md:p-8 shadow-xl">
+
+            <!-- Card Header -->
+            <div class="text-center mb-8">
+
+                <div class="inline-flex items-center justify-center
+                                w-14 h-14 rounded-full bg-slate-800 mb-4">
+
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         class="w-7 h-7 text-blue-400"
+                         fill="none"
+                         viewBox="0 0 24 24"
+                         stroke="currentColor"
+                         stroke-width="1.8">
+
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M8 10h8M8 14h5m-7 6h12a2 2 0 002-2V6a2 2 0 00-2-2H9L4 9v9a2 2 0 002 2z"/>
+
+                    </svg>
+
+                </div>
+
+                <h2 class="text-2xl font-bold mb-2">
+                    How Can We Help You?
+                </h2>
+
+                <p class="text-gray-400 text-sm">
+                    Follow these steps to access your result.
+                </p>
+
+            </div>
+
+
+            <!-- Step 1 -->
+            <div class="space-y-7">
+
+                <div class="flex items-start gap-4">
+
+                    <div class="flex-shrink-0 w-9 h-9 rounded-full
+                                    bg-blue-600/20 text-blue-400
+                                    flex items-center justify-center font-bold">
+                        1
+                    </div>
+
+                    <div>
+                        <h3 class="font-semibold text-lg mb-2">
+                            Open View Result
+                        </h3>
+
+                        <p class="text-gray-400 text-sm leading-6">
+                            Navigate to the View Result page to search
+                            for your academic result.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <!-- Step 2 -->
+                <div class="flex items-start gap-4">
+
+                    <div class="flex-shrink-0 w-9 h-9 rounded-full
+                                    bg-blue-600/20 text-blue-400
+                                    flex items-center justify-center font-bold">
+                        2
+                    </div>
+
+                    <div>
+                        <h3 class="font-semibold text-lg mb-2">
+                            Enter Your Roll Number
+                        </h3>
+
+                        <p class="text-gray-400 text-sm leading-6">
+                            Enter the roll number registered with
+                            your academic records.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <!-- Step 3 -->
+                <div class="flex items-start gap-4">
+
+                    <div class="flex-shrink-0 w-9 h-9 rounded-full
+                                    bg-blue-600/20 text-blue-400
+                                    flex items-center justify-center font-bold">
+                        3
+                    </div>
+
+                    <div>
+                        <h3 class="font-semibold text-lg mb-2">
+                            Enter Your Date of Birth
+                        </h3>
+
+                        <p class="text-gray-400 text-sm leading-6">
+                            Select your date of birth exactly as
+                            registered in your academic records.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <!-- Step 4 -->
+                <div class="flex items-start gap-4">
+
+                    <div class="flex-shrink-0 w-9 h-9 rounded-full
+                                    bg-blue-600/20 text-blue-400
+                                    flex items-center justify-center font-bold">
+                        4
+                    </div>
+
+                    <div>
+                        <h3 class="font-semibold text-lg mb-2">
+                            View Your Result
+                        </h3>
+
+                        <p class="text-gray-400 text-sm leading-6">
+                            Click the View Result button to check
+                            your available academic result.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- FAQ Section -->
+            <div class="mt-10 pt-7 border-t border-gray-800">
+
+                <h2 class="text-xl font-bold mb-6">
+                    Frequently Asked Questions
+                </h2>
+
+
+                <!-- FAQ 1 -->
+                <div class="bg-[#1b1b1b] border border-gray-800
+                                rounded-xl p-4 mb-4">
+
+                    <h3 class="font-semibold mb-2">
+                        Why can't I find my result?
+                    </h3>
+
+                    <p class="text-gray-400 text-sm leading-6">
+                        Check that your roll number and date of birth
+                        are correct. If the problem continues, contact
+                        your institution's examination department.
+                    </p>
+
+                </div>
+
+
+                <!-- FAQ 2 -->
+                <div class="bg-[#1b1b1b] border border-gray-800
+                                rounded-xl p-4 mb-4">
+
+                    <h3 class="font-semibold mb-2">
+                        What if my date of birth is rejected?
+                    </h3>
+
+                    <p class="text-gray-400 text-sm leading-6">
+                        Verify your date of birth against your official
+                        academic records and enter the correct date.
+                    </p>
+
+                </div>
+
+
+                <!-- FAQ 3 -->
+                <div class="bg-[#1b1b1b] border border-gray-800
+                                rounded-xl p-4">
+
+                    <h3 class="font-semibold mb-2">
+                        Can I add a result?
+                    </h3>
+
+                    <p class="text-gray-400 text-sm leading-6">
+                        Authorized administrators can use the Add Result
+                        page to enter academic result details.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- View Result Button -->
+            <div class="mt-8 text-center">
+
+                <a th:href="@{/view-result}"
+                   href="/view-result"
+                   class="block w-full bg-blue-600 hover:bg-blue-700
+                              text-white font-semibold py-3 px-6 rounded-xl
+                              transition duration-200 shadow-lg
+                              shadow-blue-900/20">
+
+                    Go to View Result
+
+                </a>
+
+                <p class="text-gray-500 text-xs mt-4">
+                    Please enter your details exactly as registered.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<!-- Footer -->
+<footer class="bg-[#111111] border-t border-gray-800 py-5">
+
+    <div class="max-w-7xl mx-auto px-6 text-center">
+
+        <p class="text-gray-500 text-sm">
+            &copy; 2026 Result Viewer. All rights reserved.
+        </p>
+
+    </div>
+
+</footer>
+
+
+<!-- Mobile Menu JavaScript -->
+<script>
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    menuBtn.addEventListener('click', function () {
+        const isHidden = mobileMenu.classList.toggle('hidden');
+
+        menuBtn.setAttribute('aria-expanded', String(!isHidden));
+    });
+</script>
+
+</body>
+</html>
